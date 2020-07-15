@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package hello;
+option go_package = ".;protoes";
+
+service HelloGrpc {
+    rpc SayHi(HelloRequest)returns(HelloReplay){}
+    rpc GetMsg(HelloRequest)returns(HelloMessage){}
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReplay {
+  string message = 1;
+}
+
+message HelloMessage {
+  string msg = 1;
+}
+
+service Chat {
+    rpc CommunicateStream(stream Request)returns(stream Response){}
+}
+
+message Request {
+    string input = 1;
+}
+
+message Response {
+    string output = 1;
+}
