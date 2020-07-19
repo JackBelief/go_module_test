@@ -6,13 +6,22 @@ import (
 	"go_modules_test/src/config"
 	"go_modules_test/src/etcd_proc"
 	"go_modules_test/src/protoes"
-	"time"
-
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/resolver"
+	"os"
+	"os/signal"
+	"time"
 )
 
 func main() {
+	defer func() {
+		c := make(chan os.Signal)
+		signal.Notify(c)
+		s := <-c
+		fmt.Println("get signal:", s)
+	}()
+
+
 	// 解析命令行参数，获取服务启动地址和端口
 	config.ParseServerCommandLine()
 
@@ -40,8 +49,8 @@ func main() {
 		)
 
 		if err != nil {
-			fmt.Println("Can not get SayHi:", err)
-			return
+			fmt.Println("命名解析异常，没有服务地址 err=", err)
+			continue
 		}
 
 		fmt.Printf("%v: SayHi 响应：%s\n", t, r1.GetMessage())
@@ -55,12 +64,13 @@ func main() {
 		)
 
 		if err != nil {
-			fmt.Println("Can not get GetMsg:", err)
-			return
+			fmt.Println("命名解析异常，没有服务地址 err=", err)
+			continue
 		}
 
 		fmt.Printf("%v: GetMsg 响应：%s\n", t, r2.GetMsg())
 	}
 
+	fmt.Println("client over")
 	return
 }
