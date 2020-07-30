@@ -6,7 +6,7 @@ import (
 
 
 func main() {
-	if err := nsq_proc.Init(); err != nil {
+	if err := nsq_proc.InitNSQDClient(); err != nil {
 		return
 	}
 

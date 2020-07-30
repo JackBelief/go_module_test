@@ -25,6 +25,6 @@ func PutData(ctx context.Context, esStuInfo *ESStudentInfo) error {
 		return errors.New("put fail" + err.Error())
 	}
 
-	fmt.Printf("put success id=%s index=%s type=%s ver=%d", putResp.Id, putResp.Index, putResp.Type, putResp.Version)
+	fmt.Printf("put success id=%s index=%s type=%s ver=%d\n", putResp.Id, putResp.Index, putResp.Type, putResp.Version)
 	return nil
 }
