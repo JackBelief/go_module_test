@@ -21,7 +21,6 @@ func main() {
 		fmt.Println("get signal:", s)
 	}()
 
-
 	// 解析命令行参数，获取服务启动地址和端口
 	config.ParseServerCommandLine()
 
@@ -59,7 +58,7 @@ func main() {
 		r2, err := c.GetMsg(
 			context.Background(),
 			&protoes.HelloRequest{
-				Name: "Kitty",
+				Name: "Jack",
 			},
 		)
 

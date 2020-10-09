@@ -9,6 +9,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"net"
 
@@ -61,6 +62,8 @@ func signalProc() {
 	go func() {
 		chanData := <-signalChan
 		etcd_proc.UnRegisterETCDServer(config.GCfg.GetServerAddr())
+
+		time.Sleep(2 * time.Second)
 
 		if signalId, ok := chanData.(syscall.Signal); ok == true {
 			os.Exit(int(signalId))
